@@ -14,9 +14,9 @@ function addItem()
   var dollars;
   dollars = asCurrency(runningTotal);
   document.getElementById("subtotal").innerHTML=dollars;
-  document.getElementById("price").value = " ";
-  // update a cookie called "preTax" with the value of runningTotal
-  setCookie(preTax, runningTotal, 20);
+  document.getElementById("price").value = "";
+
+  setCookie("preTax", runningTotal, 10);
 }
 }
 
@@ -47,4 +47,15 @@ function getCookie(cname) {
         }
     }
     return "";
+}
+
+function calculateReceipt(){
+    var  receiptSubtotal = getCookie("preTax");
+
+    receiptSubtotal = Number(receiptSubtotal);
+    var receiptTax = receiptSubtotal * 0.075;
+    var receiptTotal = receiptTax + receiptSubtotal;
+    document.getElementById("sub").innerHTML = asCurrency(receiptSubtotal);
+    document.getElementById("tax").innerHTML = asCurrency(receiptTax);
+    document.getElementById("tot").innerHTML = asCurrency(receiptTotal);
 }
